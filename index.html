@@ -15,8 +15,8 @@
             --background: #f4f4f9;
         }
 
-        /* Cursor Personalizado (Sol/Cruz da Bandeira) usando SVG inline */
-        html, body, button, a, .card-jogo, .buraco {
+        /* Cursor Personalizado (Sol/Cruz da Bandeira) */
+        html, body, button, a, .card-jogo, .buraco, .cano {
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='6' fill='none' stroke='%23ffcc00' stroke-width='2'/><path d='M16 4 L16 28 M4 16 L28 16' stroke='%23ffcc00' stroke-width='3' stroke-linecap='round'/></svg>") 16 16, auto;
         }
 
@@ -28,7 +28,6 @@
             color: #333;
         }
 
-        /* Header Estilo Carnaval/Pernambuco */
         header {
             background: linear-gradient(135deg, var(--azul-pe) 30%, var(--verde-olinda) 90%);
             color: var(--branco);
@@ -51,7 +50,6 @@
             font-weight: bold;
         }
 
-        /* Layout estilo Poki (Grid de Jogos) */
         .container {
             max-width: 1200px;
             margin: 30px auto;
@@ -108,7 +106,6 @@
             color: #666;
         }
 
-        /* Área do Jogo Ativo */
         .arena-jogo {
             display: none;
             background-color: var(--branco);
@@ -130,7 +127,6 @@
             margin-bottom: 15px;
         }
 
-        /* Telas dos Minijogos */
         canvas {
             background-color: #eee;
             display: block;
@@ -164,23 +160,40 @@
             font-weight: bold;
         }
 
-        /* Grid do Jogo de Saneamento */
+        /* Controles Mobile para o jogo da Rampa */
+        .controles-mobile {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .btn-control {
+            background-color: var(--azul-pe);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Grid Saneamento */
         .grid-saneamento {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
-            gap: 5px;
+            grid-template-columns: repeat(3, 90px);
+            grid-template-rows: repeat(3, 90px);
+            gap: 10px;
             justify-content: center;
             margin: 20px auto;
             background-color: #34495e;
-            padding: 10px;
+            padding: 15px;
             border-radius: 10px;
-            width: 310px;
+            width: 290px;
         }
 
         .cano {
             background-color: #ecf0f1;
-            border: 2px solid #bdc3c7;
+            border: 3px solid #bdc3c7;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -193,9 +206,9 @@
         .cano.conectado {
             background-color: #2ecc71;
             border-color: #27ae60;
+            color: white;
         }
 
-        /* Rodapé */
         footer {
             text-align: center;
             padding: 20px;
@@ -242,7 +255,7 @@
                 <div class="thumb-jogo bg-esgoto">💧</div>
                 <div class="info-jogo">
                     <h3>Saneamento Já!</h3>
-                    <p>Gire as tubulações clicando nelas até alinhar a água da rede central para as casas.</p>
+                    <p>Gire as tubulações clicando nelas até alinhar a água da rede central de canos.</p>
                 </div>
             </div>
 
@@ -260,18 +273,26 @@
         const conteudoJogo = document.getElementById('conteudo-jogo');
         
         let jogoLoopInterval;
+        let rampaAnimFrame;
+        let rampaJogando = false;
 
         function fecharJogo() {
+            rampaJogando = false;
+            cancelAnimationFrame(rampaAnimFrame);
+            clearInterval(jogoLoopInterval);
+            
             arena.style.display = 'none';
             catalogo.style.display = 'grid';
             conteudoJogo.innerHTML = '';
-            clearInterval(jogoLoopInterval);
+            
+            // Remove listeners globais para não quebrar o site
+            document.onkeydown = null;
+            document.onkeyup = null;
         }
 
         function iniciarJogo(tipo) {
             catalogo.style.display = 'none';
             arena.style.display = 'block';
-            window.scrollTo({top: arena.offsetTop - 20, behavior: 'smooth'});
 
             if (tipo === 'rua') {
                 tituloJogo.innerText = "Operação Tapa-Buraco nas Ladeiras";
@@ -290,7 +311,7 @@
         // ==========================================
         function carregarJogoRua() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Clique nos buracos pretos que aparecem no asfalto rápido!</p>
+                <p><strong>Objetivo:</strong> Clique nos buracos pretos rápidos para consertar a rua!</p>
                 <h3 id="score-rua">Buracos Consertados: 0</h3>
                 <div class="click-game-area" id="asfalto"></div>
             `;
@@ -309,7 +330,7 @@
                 
                 buraco.style.left = x + 'px';
                 buraco.style.top = y + 'px';
-                buraco.innerText = "🛠️";
+                buraco.innerText = "🚧";
 
                 buraco.onclick = function(e) {
                     e.stopPropagation();
@@ -322,20 +343,24 @@
 
                 setTimeout(() => {
                     if (buraco.parentNode) buraco.remove();
-                }, 1500);
+                }, 2000);
             }
 
-            jogoLoopInterval = setInterval(criarBuraco, 900);
+            jogoLoopInterval = setInterval(criarBuraco, 800);
         }
 
         // ==========================================
-        // JOGO 2: CALÇADA ACESSÍVEL
+        // JOGO 2: CALÇADA ACESSÍVEL (FIXED)
         // ==========================================
         function carregarJogoRampa() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Use as <b>Setas (Esquerda/Direita)</b> ou toque nas laterais para desviar dos degraus perigosos.</p>
+                <p><strong>Objetivo:</strong> Use as <b>Setas (Esquerda/Direita)</b> ou os botões abaixo para desviar dos degraus.</p>
                 <h3 id="score-rampa">Pontuação: 0</h3>
                 <canvas id="canvasRampa" width="400" height="400"></canvas>
+                <div class="controles-mobile">
+                    <button class="btn-control" id="btn-esq">◀</button>
+                    <button class="btn-control" id="btn-dir">▶</button>
+                </div>
             `;
 
             const canvas = document.getElementById('canvasRampa');
@@ -344,14 +369,21 @@
 
             let jogadorX = 180;
             let jogadorLargura = 40;
-            let obstaculoX = Math.random() * 360;
+            let obstaculoX = Math.random() * 340;
             let obstaculoY = 0;
-            let obstaculoVelocidade = 4;
+            let obstaculoVelocidade = 3;
             let rampaScore = 0;
-            let jogando = true;
+            rampaJogando = true;
 
             let teclaEsquerda = false;
             let teclaDireita = false;
+
+            // Previne que a página role ao apertar as setas do teclado
+            window.addEventListener("keydown", function(e) {
+                if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+                    e.preventDefault();
+                }
+            }, false);
 
             document.onkeydown = function(e) {
                 if (e.key === "ArrowLeft") teclaEsquerda = true;
@@ -362,70 +394,84 @@
                 if (e.key === "ArrowRight") teclaDireita = false;
             };
 
-            canvas.addEventListener('touchstart', function(e) {
-                const toqueX = e.touches[0].clientX - canvas.getBoundingClientRect().left;
-                if (toqueX < canvas.width / 2) jogadorX -= 35;
-                else jogadorX += 35;
-            });
+            // Botões de clique/toque na tela
+            document.getElementById('btn-esq').onmousedown = () => teclaEsquerda = true;
+            document.getElementById('btn-esq').onmouseup = () => teclaEsquerda = false;
+            document.getElementById('btn-dir').onmousedown = () => teclaDireita = true;
+            document.getElementById('btn-dir').onmouseup = () => teclaDireita = false;
+            
+            // Toque para Mobile
+            document.getElementById('btn-esq').ontouchstart = () => teclaEsquerda = true;
+            document.getElementById('btn-esq').ontouchend = () => teclaEsquerda = false;
+            document.getElementById('btn-dir').ontouchstart = () => teclaDireita = true;
+            document.getElementById('btn-dir').ontouchend = () => teclaDireita = false;
 
             function atualizarJogo() {
-                if (!jogando) return;
+                if (!rampaJogando) return;
 
-                if (teclaEsquerda && jogadorX > 0) jogadorX -= 5;
-                if (teclaDireita && jogadorX < canvas.width - jogadorLargura) jogadorX += 5;
+                if (teclaEsquerda && jogadorX > 0) jogadorX -= 6;
+                if (teclaDireita && jogadorX < canvas.width - jogadorLargura) jogadorX += 6;
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Calçada
                 ctx.fillStyle = "#dfd5c6";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 obstaculoY += obstaculoVelocidade;
                 if (obstaculoY > canvas.height) {
                     obstaculoY = 0;
-                    obstaculoX = Math.random() * (canvas.width - 40);
+                    obstaculoX = Math.random() * (canvas.width - 60);
                     rampaScore++;
                     scoreDisplay.innerText = "Pontuação: " + rampaScore;
-                    obstaculoVelocidade += 0.3;
+                    obstaculoVelocidade += 0.4;
                 }
 
+                // Obstáculo perigoso
                 ctx.fillStyle = "#cc0000";
-                ctx.fillRect(obstaculoX, obstaculoY, 40, 20);
+                ctx.fillRect(obstaculoX, obstaculoY, 60, 25);
                 ctx.fillStyle = "white";
-                ctx.font = "12px Arial";
-                ctx.fillText("DEGRAU", obstaculoX + 2, obstaculoY + 15);
+                ctx.font = "bold 12px Arial";
+                ctx.fillText("DEGRAU", obstaculoX + 5, obstaculoY + 17);
 
+                // Cadeirante jogador
                 ctx.fillStyle = "#0056b3";
-                ctx.fillRect(jogadorX, canvas.height - 50, jogadorLargura, 40);
+                ctx.fillRect(jogadorX, canvas.height - 60, jogadorLargura, 45);
                 ctx.fillStyle = "white";
-                ctx.font = "20px Arial";
-                ctx.fillText("♿", jogadorX + 10, canvas.height - 22);
+                ctx.font = "24px Arial";
+                ctx.fillText("♿", jogadorX + 8, canvas.height - 28);
 
+                // Detecção Real de Colisão
                 if (
-                    jogadorX < obstaculoX + 40 &&
+                    jogadorX < obstaculoX + 60 &&
                     jogadorX + jogadorLargura > obstaculoX &&
-                    canvas.height - 50 < obstaculoY + 20 &&
-                    canvas.height - 10 > obstaculoY
+                    canvas.height - 60 < obstaculoY + 25 &&
+                    canvas.height - 15 > obstaculoY
                 ) {
-                    jogando = false;
-                    ctx.fillStyle = "rgba(0,0,0,0.8)";
+                    rampaJogando = false;
+                    ctx.fillStyle = "rgba(0,0,0,0.85)";
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = "yellow";
-                    ctx.font = "20px sans-serif";
-                    ctx.fillText("Fim de Jogo! Faltou Rampa aqui.", 50, 180);
+                    ctx.fillStyle = "#ffcc00";
+                    ctx.font = "bold 20px sans-serif";
+                    ctx.fillText("Fim de Jogo! Faltou Rampa.", 60, 180);
+                    ctx.fillStyle = "white";
+                    ctx.font = "16px sans-serif";
+                    ctx.fillText("Volte ao catálogo para reiniciar!", 75, 220);
                     return;
                 }
 
-                requestAnimationFrame(atualizarJogo);
+                rampaAnimFrame = requestAnimationFrame(atualizarJogo);
             }
 
             atualizarJogo();
         }
 
         // ==========================================
-        // JOGO 3: SANEAMENTO BÁSICO (Quebra-Cabeça)
+        // JOGO 3: SANEAMENTO BÁSICO (REFEITO)
         // ==========================================
         function carregarJogoSaneamento() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Clique nos canos cinzas para rotacioná-los e conectar a água tratada (Cano Verde da Esquerda) até as residências de Olinda (Direita)!</p>
+                <p><strong>Objetivo:</strong> Toque/Clique nos canos para girá-los até que todos fiquem alinhados na horizontal (═) para a água correr livre!</p>
                 <h3 id="status-esgoto" style="color: var(--vermelho-pe);">Status: Rede Desconectada ❌</h3>
                 <div class="grid-saneamento" id="grade-canos"></div>
             `;
@@ -433,26 +479,19 @@
             const grade = document.getElementById('grade-canos');
             const statusDisplay = document.getElementById('status-esgoto');
 
-            // Configuração dos Canos (Giro em graus: 0, 90, 180, 270)
-            // Símbolos: ═ (reto horizontal), ║ (reto vertical), ╔, ╗, ╚, ╝ (curvas)
+            // Todos começam desalinhados (verticais ou em ângulos tortos)
             const canosDados = [
-                { id: 0, tipo: '═', angulo: 90 }, { id: 1, tipo: '╚', angulo: 0 },   { id: 2, tipo: '║', angulo: 90 },
-                { id: 3, tipo: '║', angulo: 0 },  { id: 4, tipo: '═', angulo: 270 }, { id: 5, tipo: '╗', angulo: 180 },
-                { id: 6, tipo: '╚', angulo: 90 }, { id: 7, tipo: '═', angulo: 0 },   { id: 8, tipo: '═', angulo: 0 }
+                { id: 0, angulo: 90 }, { id: 1, angulo: 90 }, { id: 2, angulo: 270 },
+                { id: 3, angulo: 90 }, { id: 4, angulo: 90 }, { id: 5, angulo: 90 },
+                { id: 6, angulo: 270 }, { id: 7, angulo: 90 }, { id: 8, angulo: 90 }
             ];
 
-            // Condição correta de vitória baseada em rotações específicas que criam o fluxo contínuo
             function checarVitoria() {
-                const c = canosDados;
-                // Exemplo de caminho válido usando combinações corretas de ângulos
-                if (
-                    (c[0].angulo % 180 === 0) && // horizontal
-                    (c[1].angulo === 90 || c[1].angulo === 270) && 
-                    (c[4].angulo % 180 === 0) &&
-                    (c[7].angulo % 180 === 0) &&
-                    (c[8].angulo % 180 === 0)
-                ) {
-                    statusDisplay.innerHTML = "Status: ÁGUA ENCANDADA COM SUCESSO! 🏆💦";
+                // Ganha se todos os canos estiverem retos na horizontal (0 ou 180 graus)
+                const venceu = canosDados.every(cano => cano.angulo === 0 || cano.angulo === 180);
+
+                if (venceu) {
+                    statusDisplay.innerHTML = "Status: ÁGUA NAS CASAS! REDE HIGIENIZADA! 🏆💧";
                     statusDisplay.style.color = "var(--verde-olinda)";
                     document.querySelectorAll('.cano').forEach(el => el.classList.add('conectado'));
                 } else {
@@ -465,7 +504,7 @@
             canosDados.forEach(item => {
                 const bloco = document.createElement('div');
                 bloco.classList.add('cano');
-                bloco.innerText = item.tipo;
+                bloco.innerText = "═";
                 bloco.style.transform = `rotate(${item.angulo}deg)`;
 
                 bloco.onclick = function() {
