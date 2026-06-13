@@ -378,7 +378,7 @@
         // ==========================================
         function carregarJogoRampa() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Use <b>Setas Direita/Esquerda</b> ou clique nas laterais do canvas para desviar dos degraus.</p>
+             
                 <h3 id="score-rampa">Pontuação: 0</h3>
                 <canvas id="canvasRampa" width="400" height="400"></canvas>
             `;
@@ -433,7 +433,7 @@
         // ==========================================
         function carregarJogoEsgoto() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Clique nos blocos de cano para rotacioná-los e criar um caminho contínuo da <b>Represa (💧)</b> até as <b>Casas (🏠)</b>!</p>
+               
                 <h3 id="status-esgoto" style="color: var(--vermelho-pe)">Rede de Água: Desconectada ❌</h3>
                 <div class="pipe-grid" id="gridCanos"></div>
             `;
@@ -490,7 +490,7 @@
         // ==========================================
         function carregarJogoLixo() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Use as <b>setas Esquerda/Direita</b> para mover a lixeira verde e pegar apenas Recicláveis (♻️). Evite lixo comum (🗑️)!</p>
+               
                 <h3 id="score-lixo">Pontos: 0</h3>
                 <canvas id="canvasLixo" width="400" height="400"></canvas>
             `;
@@ -547,7 +547,7 @@
         // ==========================================
         function carregarJogoIlumina() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Clique nos postes apagados (🏮) do Sítio Histórico para ligar a iluminação LED (💡)!</p>
+               
                 <h3 id="score-ilumina">Postes Ativos: 0 / 6</h3>
                 <div class="click-game-area" style="background-color:#1a1a2e; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap;" id="bairro"></div>
             `;
@@ -579,7 +579,7 @@
         // ==========================================
         function carregarJogoArvores() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Clique em qualquer lugar do terreno árido abaixo para plantar uma árvore e mitigar o calor extremo.</p>
+               
                 <h3 id="score-arvores">Árvores Plantadas: 0</h3>
                 <div class="click-game-area" style="background-color:#d35400;" id="calcadao"></div>
             `;
@@ -604,7 +604,7 @@
         // ==========================================
         function carregarJogoAlagamento() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Clique rápido nas folhas (🍁) e lixos que obstruem o bueiro urbano para evitar as enchentes!</p>
+                
                 <h3 id="score-bueiro">Obstruções Removidas: 0</h3>
                 <div class="click-game-area" style="background-color:#7f8c8d;" id="bueiro-area"></div>
             `;
@@ -636,7 +636,7 @@
         // ==========================================
         function carregarJogoPatrimonio() {
             conteudoJogo.innerHTML = `
-                <p><strong>Objetivo:</strong> Use o mouse clicando e arrastando sobre a parede para apagar as pichações e restaurar os casarões coloniais.</p>
+               
                 <h3 id="score-restauro">Casarão 0% Restaurado</h3>
                 <canvas id="canvasRestauro" width="500" height="300"></canvas>
             `;
