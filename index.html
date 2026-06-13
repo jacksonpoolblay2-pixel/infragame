@@ -568,6 +568,34 @@
                 if(mx > lx && mx < lx + 35 && my > ly - 25 && my < ly + 10) { pts++; lx = Math.random()*380+30; ly = Math.random()*90+200; document.getElementById('sc').innerText = "Infrações Autuadas: " + pts; } d();
             }; d();
         }
+
+        // ==========================================
+        // SISTEMA GLOBAL DE CONTROLE POR TECLADO (WASD + SETAS)
+        // ==========================================
+        let teclasPressionadas = {};
+        window.addEventListener('keydown', (e) => { 
+            teclasPressionadas[e.key.toLowerCase()] = true; 
+        });
+        window.addEventListener('keyup', (e) => { 
+            teclasPressionadas[e.key.toLowerCase()] = false; 
+        });
+
+        function atualizarControlesTeclado() {
+            if (document.getElementById('titulo-jogo-atual').innerText.includes("3.")) {
+                if (teclasPressionadas['a'] || teclasPressionadas['arrowleft']) px = Math.max(45, px - 6);
+                if (teclasPressionadas['d'] || teclasPressionadas['arrowright']) px = Math.min(365, px + 6);
+            }
+            if (document.getElementById('titulo-jogo-atual').innerText.includes("4.")) {
+                if (teclasPressionadas['a'] || teclasPressionadas['arrowleft']) cx = Math.max(10, cx - 7);
+                if (teclasPressionadas['d'] || teclasPressionadas['arrowright']) cx = Math.min(360, cx + 7);
+            }
+            if (document.getElementById('titulo-jogo-atual').innerText.includes("10.")) {
+                if (teclasPressionadas['a'] || teclasPressionadas['arrowleft']) bx = Math.max(65, bx - 6);
+                if (teclasPressionadas['d'] || teclasPressionadas['arrowright']) bx = Math.min(345, bx + 6);
+            }
+            requestAnimationFrame(atualizarControlesTeclado);
+        }
+        atualizarControlesTeclado();
     </script>
 </body>
 </html>
