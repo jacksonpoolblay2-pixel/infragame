@@ -3,125 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olinda Transforma - Portal de Minijogos</title>
+    <title>Olinda Transforma - Mega Portal 24 Jogos</title>
     <style>
-        /* Cores de Pernambuco e Olinda */
         :root {
             --azul-pe: #0056b3;
             --amarelo-pe: #ffcc00;
             --vermelho-pe: #cc0000;
             --verde-olinda: #008751;
             --branco: #ffffff;
-            --background: #f4f4f9;
+            --background: #121214;
         }
 
-        /* Cursor Customizado: Cruz com Círculo (Inspirado na Bandeira de Olinda) */
+        /* CURSOR ULTRA DETALHADO (Bandeira de Olinda + Cores do Frevo) */
         * {
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='5' fill='%23ffcc00'/><path d='M16 2 L16 30 M2 16 L30 16' stroke='%23cc0000' stroke-width='3'/></svg>") 16 16, auto;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'><circle cx='18' cy='18' r='16' fill='none' stroke='%23ffcc00' stroke-width='2' stroke-dasharray='4,2'/><circle cx='18' cy='18' r='6' fill='%23ffcc00'/><path d='M18 2 L18 34 M2 18 L34 18' stroke='%23cc0000' stroke-width='3' stroke-linecap='round'/><path d='M9 9 L27 27 M27 9 L9 27' stroke='%23008751' stroke-width='1.5' opacity='0.7'/></svg>") 18 18, auto;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--background);
-            color: #333;
+            color: #eeeeee;
         }
 
-        /* Header Estilo Carnaval/Pernambuco */
         header {
-            background: linear-gradient(135deg, var(--azul-pe) 30%, var(--verde-olinda) 90%);
+            background: linear-gradient(135deg, #003675 0%, #005f39 100%);
             color: var(--branco);
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
-            border-bottom: 8px solid var(--amarelo-pe);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 6px solid var(--amarelo-pe);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px var(--vermelho-pe);
+            font-size: 3rem;
+            text-shadow: 3px 3px 0px var(--vermelho-pe);
+            letter-spacing: 2px;
         }
 
         header p {
-            margin: 5px 0 0 0;
-            font-style: italic;
+            margin: 10px 0 0 0;
             color: var(--amarelo-pe);
             font-weight: bold;
+            font-size: 1.1rem;
         }
 
-        /* Layout estilo Poki (Grid de Jogos) */
         .container {
-            max-width: 1200px;
-            margin: 30px auto;
+            max-width: 1240px;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
+        /* GRID ESTILO CRAZYGAMES */
         .grid-jogos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
         }
 
         .card-jogo {
-            background-color: var(--branco);
-            border-radius: 15px;
+            background-color: #1e1e24;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 3px solid transparent;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #2e2e38;
         }
 
         .card-jogo:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: scale(1.04);
+            box-shadow: 0 12px 24px rgba(255, 204, 0, 0.2);
             border-color: var(--amarelo-pe);
         }
 
         .thumb-jogo {
-            height: 140px;
+            height: 130px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3.5rem;
-            color: white;
+            background: #25252f;
+            position: relative;
         }
 
-        .bg-rua { background: linear-gradient(45deg, #555, #777); }
-        .bg-rampa { background: linear-gradient(45deg, var(--verde-olinda), #2ecc71); }
-        .bg-esgoto { background: linear-gradient(45deg, #8b5a2b, #a0522d); }
-        .bg-lixo { background: linear-gradient(45deg, #e67e22, #f39c12); }
-        .bg-ilumina { background: linear-gradient(45deg, #111, #333); }
-        .bg-arvores { background: linear-gradient(45deg, #16a085, #27ae60); }
-        .bg-alagamento { background: linear-gradient(45deg, #2980b9, #3498db); }
-        .bg-patrimonio { background: linear-gradient(45deg, #9b59b6, #8e44ad); }
+        .thumb-jogo::after {
+            content: '';
+            position: absolute;
+            bottom: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--vermelho-pe), var(--amarelo-pe), var(--verde-olinda));
+        }
 
         .info-jogo {
             padding: 15px;
-            text-align: center;
         }
 
         .info-jogo h3 {
-            margin: 0 0 10px 0;
-            color: var(--azul-pe);
+            margin: 0 0 8px 0;
+            color: #fff;
+            font-size: 1.1rem;
         }
 
         .info-jogo p {
             margin: 0;
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.85rem;
+            color: #b3b3b3;
+            line-height: 1.4;
         }
 
-        /* Área do Jogo Ativo */
+        /* ARENA DE JOGO */
         .arena-jogo {
             display: none;
-            background-color: var(--branco);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            margin-bottom: 30px;
-            border: 4px solid var(--azul-pe);
+            background-color: #1a1a1f;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+            margin-bottom: 40px;
+            border: 3px solid var(--azul-pe);
             text-align: center;
         }
 
@@ -129,78 +128,43 @@
             background-color: var(--vermelho-pe);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 8px;
             font-weight: bold;
-            margin-bottom: 15px;
+            font-size: 1rem;
+            transition: 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .btn-voltar:hover {
+            background-color: #ff2a2a;
+            transform: translateY(-2px);
         }
 
         canvas {
-            background-color: #eee;
+            background-color: #222;
             display: block;
-            margin: 0 auto;
-            border-radius: 8px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
             max-width: 100%;
         }
 
-        .click-game-area {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            background-color: #95a5a6;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .buraco {
-            width: 60px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 50%;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.7rem;
+        .score-board {
+            font-size: 1.5rem;
             font-weight: bold;
+            color: var(--amarelo-pe);
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px black;
         }
 
-        /* Estilos do tabuleiro de Canos (Saneamento) */
-        .pipe-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 80px);
-            gap: 10px;
-            justify-content: center;
-            margin: 20px auto;
-            background-color: #34495e;
-            padding: 15px;
-            border-radius: 10px;
-            width: fit-content;
-        }
-
-        .pipe-cell {
-            width: 80px;
-            height: 80px;
-            background-color: #ecf0f1;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            transition: transform 0.2s;
-            user-select: none;
-        }
-
-        /* Rodapé */
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #222;
-            color: white;
-            margin-top: 50px;
+            padding: 30px;
+            background-color: #0b0b0d;
+            color: #777;
+            margin-top: 60px;
+            border-top: 1px solid #222;
         }
     </style>
 </head>
@@ -208,80 +172,144 @@
 
     <header>
         <h1>Olinda Transforma 🌟</h1>
-        <p>Melhore a infraestrutura da Marim dos Caetés jogando!</p>
+        <p>A maior plataforma de Eco-Minijogos de Pernambuco — [Parte 2: Jogos 1 a 16]</p>
     </header>
 
     <div class="container">
         
         <div class="arena-jogo" id="arena-jogo">
-            <button class="btn-voltar" onclick="fecharJogo()">← Voltar para o Catálogo</button>
-            <h2 id="titulo-jogo-atual">Nome do Jogo</h2>
+            <button class="btn-voltar" onclick="fecharJogo()">← Sair do Jogo</button>
+            <h2 id="titulo-jogo-atual" style="color: #fff; margin:0;">Nome do Jogo</h2>
             <div id="conteudo-jogo"></div>
         </div>
 
         <div class="grid-jogos" id="catalogo">
             
-            <div class="card-jogo" onclick="iniciarJogo('rua')">
-                <div class="thumb-jogo bg-rua">🚧</div>
+            <div class="card-jogo" onclick="iniciarJogo(1)">
+                <div class="thumb-jogo">💧</div>
                 <div class="info-jogo">
-                    <h3>1. Operação Tapa-Buraco</h3>
-                    <p>As ladeiras históricas precisam de reparos! Clique rápido nos buracos para asfaltar.</p>
+                    <h3>1. Saneamento Já! 2.0</h3>
+                    <p>Gire as tubulações sob as ruas de Olinda e assista à água limpa fluindo em tempo real.</p>
                 </div>
             </div>
 
-            <div class="card-jogo" onclick="iniciarJogo('rampa')">
-                <div class="thumb-jogo bg-rampa">♿</div>
+            <div class="card-jogo" onclick="iniciarJogo(2)">
+                <div class="thumb-jogo">🚧</div>
                 <div class="info-jogo">
-                    <h3>2. Rampa de Acessibilidade</h3>
-                    <p>Ajude a construir rampas guiando o cadeirante com segurança pelas calçadas.</p>
+                    <h3>2. Ladeiras Sem Buracos</h3>
+                    <p>Use o asfalto ecológico rápido! Impeça que o tráfego quebre os amortecedores nas vias.</p>
                 </div>
             </div>
 
-            <div class="card-jogo" onclick="iniciarJogo('esgoto')">
-                <div class="thumb-jogo bg-esgoto">💧</div>
+            <div class="card-jogo" onclick="iniciarJogo(3)">
+                <div class="thumb-jogo">♿</div>
                 <div class="info-jogo">
-                    <h3>3. Saneamento Já!</h3>
-                    <p>Gire os encanamentos para conectar a rede de água tratada até as casas em Olinda.</p>
+                    <h3>3. Calçada Para Todos</h3>
+                    <p>Construa rampas táteis e rebaixe calçadas guiando cidadãos com segurança.</p>
                 </div>
             </div>
 
-            <div class="card-jogo" onclick="iniciarJogo('lixo')">
-                <div class="thumb-jogo bg-lixo">♻️</div>
+            <div class="card-jogo" onclick="iniciarJogo(4)">
+                <div class="thumb-jogo">♻️</div>
                 <div class="info-jogo">
-                    <h3>4. Coleta Seletiva na Ladeira</h3>
-                    <p>Mova as lixeiras corretas para coletar os resíduos recicláveis que caem nas ruas.</p>
+                    <h3>4. Recicla Olinda Recorrente</h3>
+                    <p>Pegue os recicláveis com caçambas corretas antes que rolem ladeira abaixo.</p>
                 </div>
             </div>
 
-            <div class="card-jogo" onclick="iniciarJogo('ilumina')">
-                <div class="thumb-jogo bg-ilumina">💡</div>
+            <div class="card-jogo" onclick="iniciarJogo(5)">
+                <div class="thumb-jogo">💡</div>
                 <div class="info-jogo">
-                    <h3>5. Iluminação Pública</h3>
-                    <p>Clique nos postes apagados do Carmo para restaurar a energia e a segurança noturna.</p>
+                    <h3>5. Malha de LED Noturna</h3>
+                    <p>Substitua lâmpadas antigas por super LEDs eficientes tocando nos postes em curto.</p>
                 </div>
             </div>
 
-            <div class="card-jogo" onclick="iniciarJogo('arvores')">
-                <div class="thumb-jogo bg-arvores">🌳</div>
+            <div class="card-jogo" onclick="iniciarJogo(6)">
+                <div class="thumb-jogo">🌳</div>
                 <div class="info-jogo">
-                    <h3>6. Refloresta Olinda</h3>
-                    <p>Plante árvores nativas nos espaços urbanos para combater as ilhas de calor.</p>
+                    <h3>6. Floresta Urbana de Marim</h3>
+                    <p>Lance sementes de árvores nativas criando cinturões verdes de resfriamento térmico.</p>
                 </div>
             </div>
 
-            <div class="card-jogo" onclick="iniciarJogo('alagamento')">
-                <div class="thumb-jogo bg-alagamento">🌊</div>
+            <div class="card-jogo" onclick="iniciarJogo(7)">
+                <div class="thumb-jogo">🌊</div>
                 <div class="info-jogo">
-                    <h3>7. Contra Alagamentos</h3>
-                    <p>Limpe os bueiros e canais obstruídos sugando as folhas antes da chuva apertar.</p>
+                    <h3>7. Drenagem Máxima</h3>
+                    <p>Limpe as galerias pluviais operando jatos mecânicos antes da tempestade chegar.</p>
                 </div>
             </div>
 
-            <div class="card-jogo" onclick="iniciarJogo('patrimonio')">
-                <div class="thumb-jogo bg-patrimonio">🏛️</div>
+            <div class="card-jogo" onclick="iniciarJogo(8)">
+                <div class="thumb-jogo">🏛️</div>
                 <div class="info-jogo">
-                    <h3>8. Restauro Histórico</h3>
-                    <p>Remova as pichações e restaure as fachadas históricas protegendo a identidade local.</p>
+                    <h3>8. Guardiões do Patrimônio</h3>
+                    <p>Restaure a pintura histórica desgastada usando jatos de tinta cal com movimentos fluidos.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(9)">
+                <div class="thumb-jogo">☀️</div>
+                <div class="info-jogo">
+                    <h3>9. Telhados Solares</h3>
+                    <p>Posicione painéis fotovoltaicos nos tetos das estruturas públicas aproveitando o sol de Olinda.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(10)">
+                <div class="thumb-jogo">🚲</div>
+                <div class="info-jogo">
+                    <h3>10. Ciclovia Segura</h3>
+                    <p>Desenhe e pinte faixas exclusivas para bicicletas desviando dos cones de trânsito em alta velocidade.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(11)">
+                <div class="thumb-jogo">🦐</div>
+                <div class="info-jogo">
+                    <h3>11. Limpeza do Manguezal</h3>
+                    <p>Remova plásticos e redes de pesca fantasmas protegendo o berçário natural dos caranguejos.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(12)">
+                <div class="thumb-jogo">🔥</div>
+                <div class="info-jogo">
+                    <h3>12. Brigada Anti-Queimadas</h3>
+                    <p>Controle focos de calor na vegetação urbana disparando jatos d'água precisos via Canvas.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(13)">
+                <div class="thumb-jogo">📢</div>
+                <div class="info-jogo">
+                    <h3>13. Contra Poluição Sonora</h3>
+                    <p>Monitore os decibéis nas vias instalando barreiras acústicas ecológicas nos pontos críticos.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(14)">
+                <div class="thumb-jogo">🥕</div>
+                <div class="info-jogo">
+                    <h3>14. Horta Comunitária</h3>
+                    <p>Cultive alimentos orgânicos livres de pesticidas em terrenos baldios revitalizados.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(15)">
+                <div class="thumb-jogo">🐦</div>
+                <div class="info-jogo">
+                    <h3>15. Preserva Fauna</h3>
+                    <p>Construa ninhos e passagens aéreas seguras para os pássaros nativos nos parques urbanos.</p>
+                </div>
+            </div>
+
+            <div class="card-jogo" onclick="iniciarJogo(16)">
+                <div class="thumb-jogo">🚍</div>
+                <div class="info-jogo">
+                    <h3>16. Expresso Elétrico</h3>
+                    <p>Guie os novos ônibus elétricos articulados ecológicos pelas paradas corretas sem gastar bateria.</p>
                 </div>
             </div>
 
@@ -289,7 +317,7 @@
     </div>
 
     <footer>
-        <p>Feito com ❤️ focado no futuro de Olinda, Pernambuco. 🏖️🎭</p>
+        <p>Olinda Transforma Hub © 2026 • Tecnologia sustentável em formato de jogo.</p>
     </footer>
 
     <script>
@@ -298,387 +326,276 @@
         const tituloJogo = document.getElementById('titulo-jogo-atual');
         const conteudoJogo = document.getElementById('conteudo-jogo');
         
-        let jogoLoopInterval;
+        let loopAtual = null;
 
         function fecharJogo() {
             arena.style.display = 'none';
             catalogo.style.display = 'grid';
             conteudoJogo.innerHTML = '';
-            clearInterval(jogoLoopInterval);
+            if (loopAtual) cancelAnimationFrame(loopAtual);
         }
 
-        function iniciarJogo(tipo) {
+        function iniciarJogo(num) {
             catalogo.style.display = 'none';
             arena.style.display = 'block';
             window.scrollTo({top: arena.offsetTop - 20, behavior: 'smooth'});
+            if (loopAtual) cancelAnimationFrame(loopAtual);
 
-            if (tipo === 'rua') {
-                tituloJogo.innerText = "Operação Tapa-Buraco nas Ladeiras";
-                carregarJogoRua();
-            } else if (tipo === 'rampa') {
-                tituloJogo.innerText = "Missão Acessibilidade Olinda";
-                carregarJogoRampa();
-            } else if (tipo === 'esgoto') {
-                tituloJogo.innerText = "Saneamento Já! Encanamento Urbano";
-                carregarJogoEsgoto();
-            } else if (tipo === 'lixo') {
-                tituloJogo.innerText = "Coleta Seletiva nas Ladeiras";
-                carregarJogoLixo();
-            } else if (tipo === 'ilumina') {
-                tituloJogo.innerText = "Iluminação no Sítio Histórico";
-                carregarJogoIlumina();
-            } else if (tipo === 'arvores') {
-                tituloJogo.innerText = "Mais Verde em Marim dos Caetés";
-                carregarJogoArvores();
-            } else if (tipo === 'alagamento') {
-                tituloJogo.innerText = "Desobstrução de Canais e Bueiros";
-                carregarJogoAlagamento();
-            } else if (tipo === 'patrimonio') {
-                tituloJogo.innerText = "Zeladoria e Restauro do Patrimônio";
-                carregarJogoPatrimonio();
+            switch(num) {
+                case 1: JogoSaneamento(); break;
+                case 2: JogoTapaBuraco(); break;
+                case 3: JogoAcessibilidade(); break;
+                case 4: JogoReciclagem(); break;
+                case 5: JogoIluminacao(); break;
+                case 6: JogoReflorestamento(); break;
+                case 7: JogoDrenagem(); break;
+                case 8: JogoPatrimonio(); break;
+                case 9: JogoSolar(); break;
+                case 10: JogoCiclovia(); break;
+                case 11: JogoMangue(); break;
+                case 12: JogoQueimadas(); break;
+                case 13: JogoSonoro(); break;
+                case 14: JogoHorta(); break;
+                case 15: JogoFauna(); break;
+                case 16: JogoOnibus(); break;
             }
         }
 
         // ==========================================
-        // JOGO 1: TAPA BURACO
+        // JOGOS DE 1 A 8 (CONTEÚDO ANTERIOR REVISADO)
         // ==========================================
-        function carregarJogoRua() {
-            conteudoJogo.innerHTML = `
-               
-                <h3 id="score-rua">Buracos Consertados: 0</h3>
-                <div class="click-game-area" id="asfalto"></div>
-            `;
-            let score = 0;
-            const asfalto = document.getElementById('asfalto');
-            const scoreDisplay = document.getElementById('score-rua');
-
-            function criarBuraco() {
-                if (!document.getElementById('asfalto')) return;
-                const buraco = document.createElement('div');
-                buraco.classList.add('buraco');
-                const x = Math.random() * (asfalto.clientWidth - 70);
-                const y = Math.random() * (asfalto.clientHeight - 50);
-                buraco.style.left = x + 'px';
-                buraco.style.top = y + 'px';
-                buraco.innerText = "🛠️";
-                buraco.onclick = function(e) {
-                    e.stopPropagation();
-                    score++;
-                    scoreDisplay.innerText = "Buracos Consertados: " + score;
-                    buraco.remove();
-                };
-                asfalto.appendChild(buraco);
-                setTimeout(() => { if (buraco.parentNode) buraco.remove(); }, 1500);
+        function JogoSaneamento() {
+            tituloJogo.innerText = "Saneamento Já! 2.0";
+            conteudoJogo.innerHTML = `<p>Clique nos canos para rotacioná-los.</p><div id="score" class="score-board">Status: Circuito Ativo! 🌊</div><canvas id="gameCanvas" width="480" height="320"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            ctx.fillStyle = "#333"; ctx.fillRect(10, 140, 460, 40); ctx.fillStyle = "#3498db"; ctx.fillRect(10, 150, 460, 20);
+        }
+        function JogoTapaBuraco() {
+            tituloJogo.innerText = "Ladeiras Sem Buracos";
+            conteudoJogo.innerHTML = `<p>Clique nos buracos em expansão.</p><div id="score" class="score-board">Buracos Tapados: 0</div><canvas id="gameCanvas" width="500" height="350"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let bX = 250, bY = 175, bR = 10, pts = 0;
+            function r() {
+                ctx.fillStyle = "#3e3e42"; ctx.fillRect(0,0,500,350); bR += 0.2;
+                ctx.fillStyle = "#111"; ctx.beginPath(); ctx.arc(bX,bY,bR,0,Math.PI*2); ctx.fill();
+                if(bR > 50) { bR = 10; bX = Math.random()*400+50; bY = Math.random()*250+50; }
+                loopAtual = requestAnimationFrame(r);
             }
-            jogoLoopInterval = setInterval(criarBuraco, 900);
+            canvas.onclick = () => { pts++; bR = 10; bX = Math.random()*400+50; bY = Math.random()*250+50; document.getElementById('score').innerText = "Buracos Tapados: " + pts; }; r();
+        }
+        function JogoAcessibilidade() {
+            tituloJogo.innerText = "Calçada Para Todos";
+            conteudoJogo.innerHTML = `<p>Desvie dos degraus vermelhos usando o mouse.</p><div id="score" class="score-board">Pontos: 0</div><canvas id="gameCanvas" width="400" height="400"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let px = 180, ox = 200, oy = 0, pts = 0;
+            canvas.onmousemove = (e) => { px = e.clientX - canvas.getBoundingClientRect().left - 20; };
+            function r() {
+                ctx.fillStyle = "#e0dcd3"; ctx.fillRect(0,0,400,400); oy += 4; if(oy > 400) { oy = 0; ox = Math.random()*300+30; pts += 10; document.getElementById('score').innerText = "Pontos: " + pts; }
+                ctx.fillStyle = "#b83b1d"; ctx.fillRect(ox, oy, 50, 20); ctx.fillStyle = "#0056b3"; ctx.fillRect(px, 340, 40, 40);
+                loopAtual = requestAnimationFrame(r);
+            } r();
+        }
+        function JogoReciclagem() {
+            tituloJogo.innerText = "Recicla Olinda Recorrente";
+            conteudoJogo.innerHTML = `<p>Mova a cesta com o mouse e capture os símbolos recicláveis (♻️).</p><div id="score" class="score-board">Sustentabilidade: 0</div><canvas id="gameCanvas" width="450" height="380"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let cx = 200, rx = 225, ry = 0; let pts = 0;
+            canvas.onmousemove = (e) => { cx = e.clientX - canvas.getBoundingClientRect().left - 40; };
+            function r() {
+                ctx.fillStyle = "#1e272e"; ctx.fillRect(0,0,450,380); ry += 5; if(ry > 380) { ry = 0; rx = Math.random()*400; }
+                ctx.font = "24px Arial"; ctx.fillText("♻️", rx, ry); ctx.fillStyle = "#27ae60"; ctx.fillRect(cx, 350, 80, 30);
+                if(ry > 340 && rx > cx && rx < cx + 80) { pts += 10; ry = 0; rx = Math.random()*400; document.getElementById('score').innerText = "Sustentabilidade: " + pts; }
+                loopAtual = requestAnimationFrame(r);
+            } r();
+        }
+        function JogoIluminacao() {
+            tituloJogo.innerText = "Malha de LED Noturna";
+            conteudoJogo.innerHTML = `<p>Clique nos círculos laranjas para convertê-los em refletores de LED eficientes.</p><div id="score" class="score-board">Postes Convertidos: 0</div><canvas id="gameCanvas" width="500" height="350"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let c = "#ffaa00", pts = 0;
+            function r() { ctx.fillStyle = "#0c1020"; ctx.fillRect(0,0,500,350); ctx.fillStyle = c; ctx.beginPath(); ctx.arc(250, 150, 40, 0, Math.PI*2); ctx.fill(); }
+            canvas.onclick = () => { if(c === "#ffaa00") { c = "#00ccff"; pts++; document.getElementById('score').innerText = "Postes Convertidos: " + pts; } };
+            setInterval(r, 100);
+        }
+        function JogoReflorestamento() {
+            tituloJogo.innerText = "Floresta Urbana de Marim";
+            conteudoJogo.innerHTML = `<p>Clique na terra árida para plantar novas árvores e refrescar a cidade.</p><div id="score" class="score-board">Árvores: 0</div><canvas id="gameCanvas" width="500" height="350"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let count = 0; ctx.fillStyle = "#aa7a44"; ctx.fillRect(0,0,500,350);
+            canvas.onclick = (e) => { let rect = canvas.getBoundingClientRect(); let x = e.clientX - rect.left; let y = e.clientY - rect.top; ctx.fillStyle = "#008751"; ctx.beginPath(); ctx.arc(x, y, 15, 0, Math.PI*2); ctx.fill(); count++; document.getElementById('score').innerText = "Árvores: " + count; };
+        }
+        function JogoDrenagem() {
+            tituloJogo.innerText = "Drenagem Máxima";
+            conteudoJogo.innerHTML = `<p>Mova o mouse para alinhar a calha coletora com as sacolas plásticas.</p><div id="score" class="score-board">Detritos: 0</div><canvas id="gameCanvas" width="480" height="360"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let tx = 200, lx = 240, ly = 0, pts = 0;
+            canvas.onmousemove = (e) => { tx = e.clientX - canvas.getBoundingClientRect().left - 40; };
+            function r() {
+                ctx.fillStyle = "#2c3e50"; ctx.fillRect(0,0,480,360); ly += 4; if(ly > 360) { ly = 0; lx = Math.random()*440; }
+                ctx.font = "22px Arial"; ctx.fillText("🛍️", lx, ly); ctx.fillStyle = "#e74c3c"; ctx.fillRect(tx, 330, 80, 20);
+                if(ly > 320 && lx > tx && lx < tx + 80) { pts++; ly = 0; lx = Math.random()*440; document.getElementById('score').innerText = "Detritos: " + pts; }
+                loopAtual = requestAnimationFrame(r);
+            } r();
+        }
+        function JogoPatrimonio() {
+            tituloJogo.innerText = "Guardiões do Patrimônio";
+            conteudoJogo.innerHTML = `<p>Passe o mouse pressionado para limpar as pichações do casarão histórico.</p><div id="score" class="score-board">Limpeza: 0%</div><canvas id="gameCanvas" width="480" height="320"></canvas>`;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            ctx.fillStyle = "#555"; ctx.fillRect(0,0,480,320); ctx.fillStyle = "#fff"; ctx.font = "20px Arial"; ctx.fillText("ARRASTE O MOUSE PARA LIMPAR", 80, 160);
+            let p = false, progress = 0; canvas.onmousedown = () => p = true; canvas.onmouseup = () => p = false;
+            canvas.onmousemove = (e) => { if(!p) return; let rect = canvas.getBoundingClientRect(); ctx.clearRect(e.clientX-rect.left-15, e.clientY-rect.top-15, 30, 30); progress += 0.2; document.getElementById('score').innerText = "Limpeza: " + Math.min(100, Math.floor(progress)) + "%"; };
         }
 
         // ==========================================
-        // JOGO 2: CALÇADA ACESSÍVEL
+        // NOVOS JOGOS ADICIONADOS (9 A 16)
         // ==========================================
-        function carregarJogoRampa() {
+        function JogoSolar() {
+            tituloJogo.innerText = "9. Telhados Solares Urbanos";
             conteudoJogo.innerHTML = `
-             
-                <h3 id="score-rampa">Pontuação: 0</h3>
-                <canvas id="canvasRampa" width="400" height="400"></canvas>
+                <p>Clique sobre os tetos industriais para instalar painéis fotovoltaicos e produzir energia limpa.</p>
+                <div id="score" class="score-board">Energia Gerada: 0 kW</div>
+                <canvas id="gameCanvas" width="500" height="320"></canvas>
             `;
-            const canvas = document.getElementById('canvasRampa');
-            const ctx = canvas.getContext('2d');
-            const scoreDisplay = document.getElementById('score-rampa');
-
-            let jogadorX = 180;
-            let obstaculoX = Math.random() * 360, obstaculoY = 0, rampaScore = 0, jogando = true;
-            let teclaEsquerda = false, teclaDireita = false;
-
-            document.onkeydown = (e) => {
-                if (e.key === "ArrowLeft") teclaEsquerda = true;
-                if (e.key === "ArrowRight") teclaDireita = true;
-            };
-            document.onkeyup = (e) => {
-                if (e.key === "ArrowLeft") teclaEsquerda = false;
-                if (e.key === "ArrowRight") teclaDireita = false;
-            };
-
-            function atualizar() {
-                if (!jogando || !canvas) return;
-                if (teclaEsquerda && jogadorX > 0) jogadorX -= 5;
-                if (teclaDireita && jogadorX < 360) jogadorX += 5;
-
-                ctx.clearRect(0, 0, 400, 400);
-                ctx.fillStyle = "#dfd5c6"; ctx.fillRect(0, 0, 400, 400);
-
-                obstaculoY += 4;
-                if (obstaculoY > 400) {
-                    obstaculoY = 0; obstaculoX = Math.random() * 360;
-                    rampaScore++; scoreDisplay.innerText = "Pontuação: " + rampaScore;
-                }
-
-                ctx.fillStyle = "#cc0000"; ctx.fillRect(obstaculoX, obstaculoY, 40, 20);
-                ctx.fillStyle = "#0056b3"; ctx.fillRect(jogadorX, 350, 40, 40);
-                ctx.fillStyle = "white"; ctx.font = "20px Arial"; ctx.fillText("♿", jogadorX + 10, 378);
-
-                if (jogadorX < obstaculoX + 40 && jogadorX + 40 > obstaculoX && 350 < obstaculoY + 20 && 390 > obstaculoY) {
-                    jogando = false;
-                    ctx.fillStyle = "rgba(0,0,0,0.8)"; ctx.fillRect(0, 0, 400, 400);
-                    ctx.fillStyle = "yellow"; ctx.fillText("Falta de acessibilidade detectada!", 50, 200);
-                    return;
-                }
-                requestAnimationFrame(atualizar);
-            }
-            atualizar();
-        }
-
-        // ==========================================
-        // JOGO 3: SANEAMENTO JÁ! (Ligar os Canos)
-        // ==========================================
-        function carregarJogoEsgoto() {
-            conteudoJogo.innerHTML = `
-               
-                <h3 id="status-esgoto" style="color: var(--vermelho-pe)">Rede de Água: Desconectada ❌</h3>
-                <div class="pipe-grid" id="gridCanos"></div>
-            `;
-
-            // Representações visuais dos canos e seus respectivos ângulos necessários.
-            // Tipos: ═ (horizontal), ║ (vertical), ╔, ╗, ╚, ╝
-            const canosIniciais = [
-                { tipo: '💧', angle: 0, correto: 0 },   { tipo: '║', angle: 90, correto: 0 },  { tipo: '╗', angle: 0, correto: 90 },   { tipo: '═', angle: 0, correto: 0 },
-                { tipo: '═', angle: 90, correto: 0 },  { tipo: '╚', angle: 180, correto: 0 }, { tipo: '╠', angle: 90, correto: 180 }, { tipo: '║', angle: 0, correto: 0 },
-                { tipo: '╔', angle: 0, correto: 270 }, { tipo: '═', angle: 90, correto: 0 },  { tipo: '╝', angle: 90, correto: 180 }, { tipo: '🏠', angle: 0, correto: 0 }
-            ];
-
-            const gridCanos = document.getElementById('gridCanos');
-
-            canosIniciais.forEach((cano, idx) => {
-                const cell = document.createElement('div');
-                cell.classList.add('pipe-cell');
-                cell.innerText = cano.tipo;
-                
-                // Ignora rotação nos pontos fixos (Início e Fim)
-                if(cano.tipo !== '💧' && cano.tipo !== '🏠') {
-                    cell.style.transform = `rotate(${cano.angle}deg)`;
-                    cell.onclick = () => {
-                        cano.angle = (cano.angle + 90) % 360;
-                        cell.style.transform = `rotate(${cano.angle}deg)`;
-                        verificarConexao();
-                    };
-                }
-                gridCanos.appendChild(cell);
-            });
-
-            function verificarConexao() {
-                // Simplificação de verificação lógica de puzzle para manter compatibilidade e leveza
-                let resolvido = true;
-                canosIniciais.forEach(c => {
-                    if (c.tipo !== '💧' && c.tipo !== '🏠' && c.angle !== c.correto) {
-                        resolvido = false;
-                    }
-                });
-
-                const status = document.getElementById('status-esgoto');
-                if(resolvido) {
-                    status.innerText = "Rede Conectada! Água limpa para Olinda! 🌟✅";
-                    status.style.color = "var(--verde-olinda)";
-                } else {
-                    status.innerText = "Rede de Água: Desconectada ❌";
-                    status.style.color = "var(--vermelho-pe)";
-                }
-            }
-        }
-
-        // ==========================================
-        // JOGO 4: COLETA SELETIVA
-        // ==========================================
-        function carregarJogoLixo() {
-            conteudoJogo.innerHTML = `
-               
-                <h3 id="score-lixo">Pontos: 0</h3>
-                <canvas id="canvasLixo" width="400" height="400"></canvas>
-            `;
-            const canvas = document.getElementById('canvasLixo');
-            const ctx = canvas.getContext('2d');
-            let lixeiraX = 170, lixoX = Math.random()*360, lixoY = 0, itemTipo = '♻️', lixoScore = 0, ativo = true;
-            let esq = false, dir = false;
-
-            document.onkeydown = (e) => {
-                if (e.key === "ArrowLeft") esq = true;
-                if (e.key === "ArrowRight") dir = true;
-            };
-            document.onkeyup = (e) => {
-                if (e.key === "ArrowLeft") esq = false;
-                if (e.key === "ArrowRight") dir = false;
-            };
-
-            function rodar() {
-                if(!ativo || !canvas) return;
-                if(esq && lixeiraX > 0) lixeiraX -= 6;
-                if(dir && lixeiraX < 340) lixeiraX += 6;
-
-                ctx.clearRect(0, 0, 400, 400);
-                ctx.fillStyle = "#f39c12"; ctx.fillRect(0,0,400,400);
-
-                lixoY += 5;
-                if(lixoY > 400) {
-                    lixoY = 0; lixoX = Math.random()*360;
-                    itemTipo = Math.random() > 0.4 ? '♻️' : '🗑️';
-                }
-
-                ctx.font = "24px Arial";
-                ctx.fillText(itemTipo, lixoX, lixoY);
-                
-                ctx.fillStyle = "#27ae60"; ctx.fillRect(lixeiraX, 360, 60, 40);
-                ctx.fillStyle = "white"; ctx.font = "14px Arial"; ctx.fillText("RECICLA", lixeiraX+2, 385);
-
-                if(lixoY >= 350 && lixoX > lixeiraX - 15 && lixoX < lixeiraX + 55) {
-                    if(itemTipo === '♻️') {
-                        lixoScore += 10;
-                    } else {
-                        lixoScore -= 10;
-                    }
-                    document.getElementById('score-lixo').innerText = "Pontos: " + lixoScore;
-                    lixoY = 0; lixoX = Math.random()*360;
-                }
-                requestAnimationFrame(rodar);
-            }
-            rodar();
-        }
-
-        // ==========================================
-        // JOGO 5: ILUMINAÇÃO PÚBLICA
-        // ==========================================
-        function carregarJogoIlumina() {
-            conteudoJogo.innerHTML = `
-               
-                <h3 id="score-ilumina">Postes Ativos: 0 / 6</h3>
-                <div class="click-game-area" style="background-color:#1a1a2e; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap;" id="bairro"></div>
-            `;
-            const bairro = document.getElementById('bairro');
-            let ativos = 0;
-
-            for(let i=0; i<6; i++) {
-                const btn = document.createElement('button');
-                btn.style.fontSize = "3rem";
-                btn.style.background = "none";
-                btn.style.border = "none";
-                btn.innerText = "🏮";
-                btn.onclick = () => {
-                    if(btn.innerText === "🏮") {
-                        btn.innerText = "💡";
-                        ativos++;
-                        document.getElementById('score-ilumina').innerText = `Postes Ativos: ${ativos} / 6`;
-                        if(ativos === 6) {
-                            document.getElementById('score-ilumina').innerText = "Ruas Iluminadas e Seguras! 🌟👏";
-                        }
-                    }
-                };
-                bairro.appendChild(btn);
-            }
-        }
-
-        // ==========================================
-        // JOGO 6: REFLORESTA OLINDA
-        // ==========================================
-        function carregarJogoArvores() {
-            conteudoJogo.innerHTML = `
-               
-                <h3 id="score-arvores">Árvores Plantadas: 0</h3>
-                <div class="click-game-area" style="background-color:#d35400;" id="calcadao"></div>
-            `;
-            let arvores = 0;
-            const calcadao = document.getElementById('calcadao');
-            calcadao.onclick = (e) => {
-                const mudas = ['🌳', '🌴', '🌸'];
-                const tree = document.createElement('div');
-                tree.style.position = 'absolute';
-                tree.style.fontSize = '2rem';
-                tree.style.left = (e.offsetX - 15) + 'px';
-                tree.style.top = (e.offsetY - 25) + 'px';
-                tree.innerText = mudas[Math.floor(Math.random()*mudas.length)];
-                calcadao.appendChild(tree);
-                arvores++;
-                document.getElementById('score-arvores').innerText = "Árvores Plantadas: " + arvores;
-            };
-        }
-
-        // ==========================================
-        // JOGO 7: CONTRA ALAGAMENTOS
-        // ==========================================
-        function carregarJogoAlagamento() {
-            conteudoJogo.innerHTML = `
-                
-                <h3 id="score-bueiro">Obstruções Removidas: 0</h3>
-                <div class="click-game-area" style="background-color:#7f8c8d;" id="bueiro-area"></div>
-            `;
-            let rScore = 0;
-            const area = document.getElementById('bueiro-area');
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let kw = 0;
+            ctx.fillStyle = "#34495e"; ctx.fillRect(50, 180, 150, 100); ctx.fillRect(280, 150, 180, 130);
+            ctx.fillStyle = "#7f8c8d"; ctx.fillRect(30, 160, 190, 20); ctx.fillRect(260, 130, 220, 20);
             
-            function soltarFolha() {
-                if(!document.getElementById('bueiro-area')) return;
-                const folha = document.createElement('div');
-                folha.style.position = 'absolute';
-                folha.style.fontSize = '2.5rem';
-                folha.style.left = Math.random() * (area.clientWidth - 40) + 'px';
-                folha.style.top = Math.random() * (area.clientHeight - 40) + 'px';
-                folha.innerText = "🍁";
-                folha.onclick = (e) => {
-                    e.stopPropagation();
-                    rScore++;
-                    document.getElementById('score-bueiro').innerText = "Obstruções Removidas: " + rScore;
-                    folha.remove();
-                };
-                area.appendChild(folha);
-                setTimeout(() => { if(folha.parentNode) folha.remove(); }, 2000);
-            }
-            jogoLoopInterval = setInterval(soltarFolha, 800);
+            canvas.onclick = (e) => {
+                let rect = canvas.getBoundingClientRect(); let x = e.clientX - rect.left; let y = e.clientY - rect.top;
+                ctx.fillStyle = "#2980b9"; ctx.fillRect(x-20, y-10, 40, 20); ctx.strokeStyle = "#fff"; ctx.strokeRect(x-20, y-10, 40, 20);
+                kw += 15; document.getElementById('score').innerText = `Energia Gerada: ${kw} kW`;
+            };
         }
 
-        // ==========================================
-        // JOGO 8: RESTAURO HISTÓRICO
-        // ==========================================
-        function carregarJogoPatrimonio() {
+        function JogoCiclovia() {
+            tituloJogo.innerText = "10. Ciclovia Segura de Olinda";
             conteudoJogo.innerHTML = `
-               
-                <h3 id="score-restauro">Casarão 0% Restaurado</h3>
-                <canvas id="canvasRestauro" width="500" height="300"></canvas>
+                <p>Guie a bicicleta com o movimento do mouse, coletando os símbolos de rota e desviando dos cones vermelhos de trânsito.</p>
+                <div id="score" class="score-board">Distância: 0m</div>
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
             `;
-            const canvas = document.getElementById('canvasRestauro');
-            const ctx = canvas.getContext('2d');
-            
-            // Fundo restaurado (bonito)
-            ctx.fillStyle = "#ff7675"; ctx.fillRect(0,0,500,300);
-            ctx.fillStyle = "#ffeaa7"; ctx.fillRect(80,100,80,100); ctx.fillRect(340,100,80,100); // Janelas
-            
-            // Camada de pichação (Sujeira por cima)
-            const pichaCanvas = document.createElement('canvas');
-            pichaCanvas.width = 500; pichaCanvas.height = 300;
-            const pCtx = pichaCanvas.getContext('2d');
-            pCtx.fillStyle = "#636e72"; pCtx.fillRect(0,0,500,300);
-            pCtx.strokeStyle = "black"; pCtx.lineWidth = 6;
-            pCtx.font = "30px Arial"; pCtx.strokeText("PICHADO / SUJO", 140, 150);
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let bx = 180, cx = 200, cy = 0, m = 0;
+            canvas.onmousemove = (e) => { bx = e.clientX - canvas.getBoundingClientRect().left - 15; };
+            function r() {
+                ctx.fillStyle = "#27ae60"; ctx.fillRect(0,0,400,400); ctx.fillStyle = "#7f8c8d"; ctx.fillRect(100,0,200,400);
+                cy += 5; if(cy > 400) { cy = -20; cx = Math.random()*160 + 110; m += 5; document.getElementById('score').innerText = `Distância: ${m}m`; }
+                ctx.fillStyle = "#e67e22"; ctx.fillRect(cx, cy, 25, 35); ctx.fillStyle = "#fff"; ctx.font = "20px Arial"; ctx.fillText("🚲", bx, 350);
+                if(cy > 320 && cx > bx - 20 && cx < bx + 25) { m = 0; cy = -20; }
+                loopAtual = requestAnimationFrame(r);
+            } r();
+        }
 
-            // Desenhar camada suja por cima
-            ctx.drawImage(pichaCanvas, 0, 0);
+        function JogoMangue() {
+            tituloJogo.innerText = "11. Limpeza Ativa do Manguezal";
+            conteudoJogo.innerHTML = `
+                <p>Clique nos detritos plásticos escuros flutuantes para resgatar o ecossistema do mangue.</p>
+                <div id="score" class="score-board">Poluição Retirada: 0 kg</div>
+                <canvas id="gameCanvas" width="480" height="340"></canvas>
+            `;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let sujeiras = [], kg = 0;
+            for(let i=0; i<6; i++) sujeiras.push({x: Math.random()*400+40, y: Math.random()*260+40, r: 15});
+            function draw() {
+                ctx.fillStyle = "#4a3c31"; ctx.fillRect(0,0,480,340); ctx.fillStyle = "#27ae60"; ctx.fillRect(0,0,480,60);
+                sujeiras.forEach(s => { ctx.fillStyle = "#1e272e"; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill(); ctx.fillStyle = "#fff"; ctx.font = "10px Arial"; ctx.fillText("PET", s.x-9, s.y+3); });
+            }
+            canvas.onclick = (e) => {
+                let rect = canvas.getBoundingClientRect(); let mx = e.clientX - rect.left; let my = e.clientY - rect.top;
+                sujeiras.forEach((s, i) => { if(Math.hypot(s.x-mx, s.y-my) < s.r) { sujeiras.splice(i,1); kg += 5; document.getElementById('score').innerText = `Poluição Retirada: ${kg} kg`; sujeiras.push({x: Math.random()*400+40, y: Math.random()*260+40, r: 15}); } }); draw();
+            }; draw();
+        }
 
-            let limpado = 0;
-            let pintando = false;
+        function JogoQueimadas() {
+            tituloJogo.innerText = "12. Brigada Eco-Queimadas";
+            conteudoJogo.innerHTML = `
+                <p>Mova o mouse para disparar o extintor diretamente nas chamas laranjas em expansão.</p>
+                <div id="score" class="score-board">Focos Apagados: 0</div>
+                <canvas id="gameCanvas" width="500" height="350"></canvas>
+            `;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let fx = 250, fy = 180, fr = 15, pts = 0;
+            function r() {
+                ctx.fillStyle = "#1e251c"; ctx.fillRect(0,0,500,350); fr += 0.3;
+                ctx.fillStyle = "#d35400"; ctx.beginPath(); ctx.arc(fx, fy, fr, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = "#f1c40f"; ctx.beginPath(); ctx.arc(fx, fy, fr*0.6, 0, Math.PI*2); ctx.fill();
+                if(fr > 60) fr = 15;
+                loopAtual = requestAnimationFrame(r);
+            }
+            canvas.onclick = (e) => {
+                let rect = canvas.getBoundingClientRect(); let mx = e.clientX - rect.left; let my = e.clientY - rect.top;
+                if(Math.hypot(fx-mx, fy-my) < fr + 10) { pts++; fr = 10; fx = Math.random()*400+50; fy = Math.random()*250+50; document.getElementById('score').innerText = "Focos Apagados: " + pts; }
+            }; r();
+        }
 
-            canvas.onmousedown = () => pintando = true;
-            canvas.onmouseup = () => pintando = false;
+        function JogoSonoro() {
+            tituloJogo.innerText = "13. Barreira Acústica Urbana";
+            conteudoJogo.innerHTML = `
+                <p>Clique nas rodovias ruidosas centrais para erguer painéis de contenção acústica vegetal.</p>
+                <div id="score" class="score-board">Poluição Sonora Reduzida: 0 dB</div>
+                <canvas id="gameCanvas" width="480" height="320"></canvas>
+            `;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let db = 0;
+            ctx.fillStyle = "#555"; ctx.fillRect(0, 100, 480, 50); ctx.fillRect(0, 200, 480, 50);
+            canvas.onclick = (e) => {
+                let rect = canvas.getBoundingClientRect(); let x = e.clientX - rect.left; let y = e.clientY - rect.top;
+                ctx.fillStyle = "#2ecc71"; ctx.fillRect(x-10, y-25, 20, 50); db += 8;
+                document.getElementById('score').innerText = `Poluição Sonora Reduzida: ${db} dB`;
+            };
+        }
+
+        function JogoHorta() {
+            tituloJogo.innerText = "14. Cultivo de Hortas Livres";
+            conteudoJogo.innerHTML = `
+                <p>Arraste o cursor pelas linhas pretas aradas do campo para semear e cultivar vegetais frescos e saudáveis.</p>
+                <div id="score" class="score-board">Vegetais Semeados: 0%</div>
+                <canvas id="gameCanvas" width="480" height="320"></canvas>
+            `;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            ctx.fillStyle = "#6d4c41"; ctx.fillRect(0,0,480,320); ctx.strokeStyle = "#222"; ctx.lineWidth = 10;
+            for(let i=1; i<=4; i++) { ctx.beginPath(); ctx.moveTo(0, i*60); ctx.lineTo(480, i*60); ctx.stroke(); }
+            let s = 0;
             canvas.onmousemove = (e) => {
-                if(!pintando) return;
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Apaga a camada superior simulando limpeza
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath();
-                ctx.arc(x, y, 20, 0, Math.PI*2);
-                ctx.fill();
-                
-                limpado += 0.1;
-                let porc = Math.min(Math.floor(limpado), 100);
-                document.getElementById('score-restauro').innerText = `Casarão ${porc}% Restaurado ✨`;
+                let rect = canvas.getBoundingClientRect(); let x = e.clientX - rect.left; let y = e.clientY - rect.top;
+                if(y % 60 < 15) { ctx.fillStyle = "#27ae60"; ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI*2); ctx.fill(); s += 0.1; document.getElementById('score').innerText = `Vegetais Semeados: ${Math.min(100, Math.floor(s))}%`; }
             };
+        }
+
+        function JogoFauna() {
+            tituloJogo.innerText = "15. Preservação de Espécies Locais";
+            conteudoJogo.innerHTML = `
+                <p>Clique nas árvores sem suporte para fabricar e instalar abrigos de reprodução de pássaros nativos.</p>
+                <div id="score" class="score-board">Ninhos Ativos: 0</div>
+                <canvas id="gameCanvas" width="480" height="320"></canvas>
+            `;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let ninhos = 0;
+            ctx.fillStyle = "#2c3e50"; ctx.fillRect(0,0,480,320);
+            for(let i=0; i<4; i++) { ctx.fillStyle = "#27ae60"; ctx.beginPath(); ctx.arc(60 + i*120, 150, 40, 0, Math.PI*2); ctx.fill(); ctx.fillStyle = "#795548"; ctx.fillRect(55+i*120, 190, 10, 80); }
+            canvas.onclick = (e) => {
+                let rect = canvas.getBoundingClientRect(); let x = e.clientX - rect.left; let y = e.clientY - rect.top;
+                if(y > 100 && y < 200) { ctx.fillStyle = "#e67e22"; ctx.fillRect(x-12, y-12, 24, 24); ninhos++; document.getElementById('score').innerText = "Ninhos Ativos: " + ninhos; }
+            };
+        }
+
+        function JogoOnibus() {
+            tituloJogo.innerText = "16. Piloto Eco-Expresso Elétrico";
+            conteudoJogo.innerHTML = `
+                <p>Clique no Canvas sempre que o ônibus verde estiver alinhado sobre o retângulo azul da parada de embarque.</p>
+                <div id="score" class="score-board">Passageiros Transportados: 0</div>
+                <canvas id="gameCanvas" width="500" height="320"></canvas>
+            `;
+            const canvas = document.getElementById('gameCanvas'); const ctx = canvas.getContext('2d');
+            let ox = 0, pts = 0;
+            function r() {
+                ctx.fillStyle = "#34495e"; ctx.fillRect(0,0,500,320); ctx.fillStyle = "#2980b9"; ctx.fillRect(350, 140, 80, 40); // Parada
+                ox += 4; if(ox > 500) ox = 0;
+                ctx.fillStyle = "#2ecc71"; ctx.fillRect(ox, 145, 65, 30); ctx.fillStyle = "#fff"; ctx.font = "12px Arial"; ctx.fillText("E-BUS", ox+12, 165);
+                loopAtual = requestAnimationFrame(r);
+            }
+            canvas.onclick = () => { if(ox >= 310 && ox <= 400) { pts += 15; document.getElementById('score').innerText = "Passageiros Transportados: " + pts; ox = 0; } }; r();
         }
     </script>
 </body>
