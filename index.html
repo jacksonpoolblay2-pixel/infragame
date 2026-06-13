@@ -168,6 +168,7 @@
         
         let loopAtual = null;
         let teclas = {};
+        let px = 200, cx = 190, tx = 190, bx = 200, ax = 60, ay = 160; // Variaveis de controle global de posições
 
         // Sistema híbrido (Teclado + Touch)
         window.addEventListener('keydown', (e) => { teclas[e.key.toLowerCase()] = true; if(['arrowleft','arrowright',' '].includes(e.key)) e.preventDefault(); });
@@ -184,7 +185,9 @@
             window.scrollTo({top: arena.offsetTop - 10, behavior: 'smooth'});
             if (loopAtual) cancelAnimationFrame(loopAtual);
 
-            // Gerencia quando deve mostrar os controles de celular
+            // Reseta variáveis de posição ao entrar
+            px = 200; cx = 190; tx = 190; bx = 200; ax = 60; ay = 160;
+
             if([3, 4, 7, 10, 20].includes(num)) { painelToque.style.display = 'flex'; }
 
             switch(num) {
@@ -192,7 +195,6 @@
                 case 4: JogoReciclagem(); break; case 5: JogoIluminacao(); break; case 6: JogoReflorestamento(); break;
                 case 7: JogoDrenagem(); break; case 8: JogoPatrimonio(); break; case 9: JogoSolar(); break;
                 case 10: JogoCiclovia(); break; case 11: JogoMangue(); break; case 12: JogoQueimadas(); break;
-                // Os próximos jogos entram no roteamento da parte 2
                 case 13: JogoSonoro(); break; case 14: JogoHorta(); break; case 15: JogoFauna(); break;
                 case 16: JogoOnibus(); break; case 17: JogoBaterias(); break; case 18: JogoPraia(); break;
                 case 19: JogoFiltro(); break; case 20: JogoAbelha(); break; case 21: JogoLogistica(); break;
@@ -200,7 +202,6 @@
             }
         }
 
-        // JOGOS DO 1 AO 12 REMODELADOS COM COMPATIBILIDADE TOTAL
         function JogoSaneamento() {
             tituloJogo.innerText = "1. Saneamento Já! 2.0";
             conteudoJogo.innerHTML = `<p>Clique nos blocos cinzas para rotacionar as tubulações sob a ladeira.</p><div id="sc" class="score-board">Status: Desconectado</div><canvas id="gameCanvas" width="480" height="320"></canvas>`;
@@ -247,7 +248,7 @@
             tituloJogo.innerText = "3. Calçada Para Todos";
             conteudoJogo.innerHTML = `<p>Use A/D, Setas ou os botões virtuais da tela para mover o cadeirante.</p><div id="sc" class="score-board">Metros: 0</div><canvas id="gameCanvas" width="450" height="340"></canvas>`;
             let canvas = document.getElementById('gameCanvas'); let ctx = canvas.getContext('2d');
-            let px = 200, ox = 150, oy = -40, pts = 0;
+            let ox = 150, oy = -40, pts = 0;
             function r() {
                 ctx.fillStyle = "#dcdde1"; ctx.fillRect(0,0,450,340);
                 if(teclas['a'] || teclas['arrowleft']) px = Math.max(10, px - 6);
@@ -264,7 +265,7 @@
             tituloJogo.innerText = "4. Recicla Olinda";
             conteudoJogo.innerHTML = `<p>Mova a caçamba verde com o teclado ou botões virtuais para pegar recicláveis (♻️).</p><div id="sc" class="score-board">Pontos: 0</div><canvas id="gameCanvas" width="460" height="340"></canvas>`;
             let canvas = document.getElementById('gameCanvas'); let ctx = canvas.getContext('2d');
-            let cx = 190, ix = 200, iy = 0, tipo = "♻️", pts = 0;
+            let ix = 200, iy = 0, tipo = "♻️", pts = 0;
             function r() {
                 ctx.fillStyle = "#1e272e"; ctx.fillRect(0,0,460,340);
                 if(teclas['a'] || teclas['arrowleft']) cx = Math.max(5, cx - 7);
@@ -312,7 +313,7 @@
             tituloJogo.innerText = "7. Drenagem Máxima";
             conteudoJogo.innerHTML = `<p>Controle a grade de captação para reter os resíduos levados pela enxurrada.</p><div id="sc" class="score-board">Retidos: 0</div><canvas id="gameCanvas" width="460" height="340"></canvas>`;
             let canvas = document.getElementById('gameCanvas'); let ctx = canvas.getContext('2d');
-            let tx = 190, lx = 200, ly = -20, pts = 0;
+            let lx = 200, ly = -20, pts = 0;
             function r() {
                 ctx.fillStyle = "#2c3e50"; ctx.fillRect(0,0,460,340); ctx.fillStyle = "#111"; ctx.fillRect(0,320,460,20);
                 if(teclas['a'] || teclas['arrowleft']) tx = Math.max(5, tx - 7);
@@ -354,7 +355,7 @@
             tituloJogo.innerText = "10. Ciclovia Segura";
             conteudoJogo.innerHTML = `<p>[A/D ou Botões] Guie a bicicleta verde e evite colidir contra os cones.</p><div id="sc" class="score-board">Score: 0</div><canvas id="gameCanvas" width="440" height="340"></canvas>`;
             let canvas = document.getElementById('gameCanvas'); let ctx = canvas.getContext('2d');
-            let bx = 200, cx = 220, cy = -40, pts = 0;
+            let cx = 220, cy = -40, pts = 0;
             function r() {
                 ctx.fillStyle = "#2f3640"; ctx.fillRect(0,0,440,340); ctx.fillStyle = "#e1b12c"; ctx.fillRect(60,0,320,340);
                 if(teclas['a'] || teclas['arrowleft']) bx = Math.max(65, bx - 6);
@@ -399,7 +400,7 @@
             }; r();
         }
 
-        // function JogoSonoro() {
+        function JogoSonoro() {
             tituloJogo.innerText = "13. Contra Ruídos";
             conteudoJogo.innerHTML = `<p>Toque nas grandes avenidas para erguer barreiras acústicas de vegetação.</p><div id="sc" class="score-board">Ruído Retido: 0 dB</div><canvas id="gameCanvas" width="480" height="320"></canvas>`;
             let canvas = document.getElementById('gameCanvas'); let ctx = canvas.getContext('2d'); let db = 0;
@@ -522,7 +523,7 @@
             tituloJogo.innerText = "20. Polinização Ativa";
             conteudoJogo.innerHTML = `<p>Mova a abelha (quadradinho amarelo) usando WASD, Setas ou os botões até a flor laranjada.</p><div id="sc" class="score-board">Flores Polinizadas: 0</div><canvas id="gameCanvas" width="460" height="340"></canvas>`;
             let canvas = document.getElementById('gameCanvas'); let ctx = canvas.getContext('2d');
-            let ax = 60, ay = 160, fx = 300, fy = 160, pts = 0;
+            let fx = 300, fy = 160, pts = 0;
             function r() {
                 ctx.fillStyle = "#1e251c"; ctx.fillRect(0,0,460,340);
                 if(teclas['a'] || teclas['arrowleft']) ax = Math.max(10, ax - 5);
@@ -594,7 +595,6 @@
                 if(mx > lx && mx < lx + 30 && my > ly - 20 && my < ly + 10) { pts++; lx = Math.random()*380+30; ly = Math.random()*80+190; document.getElementById('sc').innerText = "Apreensões: " + pts; } d();
             }; d();
         }
-        
-        </script>
+    </script>
 </body>
 </html>
